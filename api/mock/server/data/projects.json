@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Financeiro",
+      "color": "#FFC107",
+      "id": 1
+    },
+    {
+      "name": "Estudos",
+      "color": "#827717",
+      "id": 2
+    },
+    {
+      "name": "Trabalho",
+      "color": "#F44336",
+      "id": 3
+    },
+    {
+      "name": "Feza",
+      "color": "#3F51B5",
+      "id": 5
+    },
+    {
+      "name": "Amor",
+      "color": "#6A1B9A",
+      "id": 6
+    }
+  ]
