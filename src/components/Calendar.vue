@@ -18,8 +18,8 @@ export default {
 .calendarContainer {
   margin: auto;
   position: fixed;
-  bottom: 10%;
-  right: 5%;
+  top: 10%;
+  right: 1%;
 }
 span {
   text-align: center;

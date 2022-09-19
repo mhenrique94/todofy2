@@ -91,7 +91,6 @@ export default {
         title: null,
         date: null,
         project: null,
-        user: null,
         status: null,
         userId: null,
       },
@@ -118,7 +117,7 @@ export default {
       this.reload();
     },
     removeTasks(id) {
-      TaskApi.deleteTasks(id);
+      TaskApi.removeTask(id);
       this.reload();
     },
     updateTasks(mytask) {
@@ -135,7 +134,7 @@ export default {
       this.componentKey += 1;
     },
     reload() {
-      window.location.href = "index.html";
+      window.location.href = "/";
     },
   },
   created() {

@@ -1,4 +1,4 @@
-# todovue
+# todofy 2
 
 ### Versão 2 do aplicativo todofy, feito inteiramente em componentes Vuejs
 

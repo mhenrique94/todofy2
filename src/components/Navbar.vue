@@ -13,6 +13,9 @@
       <li>
         <router-link to="/manage" class="white--text">Gerenciar</router-link>
       </li>
+      <li v-if="loggedUser" @click="$emit('logout')">
+        <router-link to="/" class="white--text">Sair</router-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -20,6 +23,7 @@
 <script>
 export default {
   name: "Navbar",
+  props: ["loggedUser"],
 };
 </script>
 

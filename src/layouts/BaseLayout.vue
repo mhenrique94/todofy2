@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-app-bar app color="#fb2784">
-      <Navbar />
+    <v-app-bar app color="#fb2784" v-if="loggedUser">
+      <Navbar :loggedUser="loggedUser" @logout="logout()" />
     </v-app-bar>
     <v-main class="mx-8 mb-12 adjust-footer">
       <router-view />
@@ -30,10 +30,26 @@ export default {
     Navbar,
     Calendar,
   },
+  data() {
+    return {
+      loggedUser: null,
+    };
+  },
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
+    getUser() {
+      this.loggedUser = window.localStorage.getItem("loggedUser");
+    },
+    logout() {
+      this.loggedUser = "";
+      this.loggedUser = window.localStorage.setItem("loggedUser", "");
+      this.$router.push({ name: "login" });
+    },
+  },
+  created() {
+    this.getUser();
   },
 };
 </script>

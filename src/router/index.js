@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import ListView from "../pages/ListView.vue";
 import ManageView from "../pages/ManageView.vue";
 import RegisterView from "../pages/RegisterView.vue";
+import TasksSummaryView from "../pages/TasksSummaryView.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
     path: "/register",
     name: "register",
     component: RegisterView,
+  },
+  {
+    path: "/summary",
+    name: "taskSummary",
+    component: TasksSummaryView,
   },
 ];
 
