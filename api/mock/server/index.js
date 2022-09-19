@@ -29,7 +29,8 @@ app.get("/api/tasks/summary", tasks.summary);
 app.get("/api/tasks", tasks.find);
 app.get("/api/tasks/:id", tasks.find);
 app.post("/api/tasks", tasks.add);
-app.post("/api/tasks/:id", tasks.update);
+// app.post("/api/tasks/:id", tasks.update);
+app.patch("/api/tasks/:id", tasks.update);
 app.delete("/api/tasks/:id", tasks.remove);
 // PROJECTS
 app.get("/api/projects", projects.find);

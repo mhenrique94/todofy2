@@ -1,10 +1,8 @@
-import axios from "axios";
-
-axios.defaults.baseURL = "http://localhost:3001";
+import api from "@/api/index";
 
 export default {
   getProjects: (callback) => {
-    axios
+    api
       .get("api/projects")
       .then((response) => {
         callback(response.data);
@@ -13,12 +11,10 @@ export default {
         console.log(`Error: ${error}`);
       });
   },
-  addProject: (callback, project) => {
-    axios.post("api/projects", project).then((response) => {
-      callback(response.data);
-    });
+  addProject: (project) => {
+    api.post("api/projects", project);
   },
   delProject(callback, id) {
-    axios.delete(`api/projects/${id}`).then(() => callback());
+    api.delete(`api/projects/${id}`).then(() => callback());
   },
 };

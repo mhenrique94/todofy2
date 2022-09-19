@@ -1,69 +1,81 @@
 <template>
-  <div class="wrapperPage">
-    <v-btn
-      class="mx-2 btn-floating"
-      fab
-      dark
-      color="pink"
-      @click="
-        editIsEnabled = true;
-        listIsEnabled = false;
-      "
-    >
-      <v-icon dark> mdi-plus </v-icon>
-    </v-btn>
+  <div>
+    <v-app-bar app color="#fb2784">
+      <Navbar
+        :loggedUser="loggedUser"
+        :loggedUsername="loggedUsername"
+        v-show="show"
+        @logout="logout()"
+      />
+    </v-app-bar>
+    <div class="wrapperPage">
+      <v-btn
+        class="mx-2 btn-floating"
+        fab
+        dark
+        color="pink"
+        @click="
+          editIsEnabled = true;
+          listIsEnabled = false;
+        "
+      >
+        <v-icon dark> mdi-plus </v-icon>
+      </v-btn>
 
-    <div>
-      <v-text-field
-        v-show="!editIsEnabled"
-        v-model="input"
-        label="Buscar"
-        height="40"
-      ></v-text-field>
-    </div>
-    <formTask
-      v-show="editIsEnabled"
-      :key="componentKey"
-      :task="task"
-      :categories="categories"
-      :editingTask="editingTask"
-      @to-index="reload()"
-      @salva-task="
-        (task) => {
-          postTasks(task);
-        }
-      "
-      @atualiza-task="
-        (mytask) => {
-          updateTasks(mytask);
-        }
-      "
-    />
-    <div
-      v-for="(tarefa, index) in inputSearch"
-      :key="index"
-      v-show="listIsEnabled"
-    >
-      <cardTask
-        :tarefa="tarefa"
+      <div>
+        <v-text-field
+          v-show="!editIsEnabled"
+          v-model="input"
+          label="Buscar"
+          height="40"
+        ></v-text-field>
+      </div>
+      <formTask
+        v-show="editIsEnabled"
+        :key="componentKey"
         :task="task"
-        @deleta-task="
-          (id) => {
-            deleteTasks(id);
-            getTasks();
+        :projects="projects"
+        :statuses="statuses"
+        :editingTask="editingTask"
+        @to-index="reload()"
+        @salva-task="
+          (task) => {
+            postTasks(task);
           }
         "
-        @edita-task="
-          (receives) => {
-            task = receives;
-            editingTask = true;
-            editIsEnabled = true;
-            listIsEnabled = false;
-            forceRenderer();
+        @atualiza-task="
+          (mytask) => {
+            updateTasks(mytask);
           }
         "
       />
+      <div
+        v-for="(tarefa, index) in inputSearch"
+        :key="index"
+        v-show="listIsEnabled"
+      >
+        <cardTask
+          :tarefa="tarefa"
+          :task="task"
+          @deleta-task="
+            (id) => {
+              removeTasks(id);
+              getTasks();
+            }
+          "
+          @edita-task="
+            (receives) => {
+              task = receives;
+              editingTask = true;
+              editIsEnabled = true;
+              listIsEnabled = false;
+              forceRenderer();
+            }
+          "
+        />
+      </div>
     </div>
+    <Calendar v-show="show" />
   </div>
 </template>
 
@@ -72,6 +84,8 @@ import formTask from "../components/Form.vue";
 import cardTask from "../components/Card.vue";
 import TaskApi from "@/api/taskApi";
 import ProjectsApi from "@/api/projectsApi";
+import Calendar from "@/components/Calendar.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   name: "ListView",
@@ -79,9 +93,12 @@ export default {
   components: {
     formTask,
     cardTask,
+    Calendar,
+    Navbar,
   },
   data() {
     return {
+      show: true,
       editIsEnabled: false,
       listIsEnabled: true,
       editingTask: false,
@@ -92,16 +109,27 @@ export default {
         date: null,
         project: null,
         status: null,
-        userId: null,
       },
       projects: [],
       componentKey: {
         type: Number,
       },
       input: "",
+      statuses: ["done", "pending", "in progress"],
+      loggedUser: "",
+      loggedUsername: "",
     };
   },
   methods: {
+    carregaLoggedser() {
+      let usertInfo = JSON.parse(
+        window.localStorage.getItem("loggedUserInfos")
+      );
+      this.loggedUser = window.localStorage.getItem("loggedUser");
+      this.loggedUsername =
+        usertInfo.username.charAt(0).toUpperCase() +
+        usertInfo.username.slice(1);
+    },
     getTasks() {
       TaskApi.getTasks((respostaApi) => {
         this.tasks = respostaApi;
@@ -109,7 +137,9 @@ export default {
     },
     getProjects() {
       ProjectsApi.getProjects((response) => {
-        this.projects = response;
+        for (let each of response) {
+          this.projects.push(each.name);
+        }
       });
     },
     postTasks(task) {
@@ -136,10 +166,27 @@ export default {
     reload() {
       window.location.href = "/";
     },
+    exhibs() {
+      console.log("base=== exibe se foi chamado");
+      if (
+        this.$route.name == "login" ||
+        this.$route.name == "taskSummary" ||
+        this.$route.name == "register"
+      ) {
+        this.show = false;
+      } else {
+        this.show = true;
+      }
+    },
+    logout() {
+      window.localStorage.clear;
+      this.$router.push({ name: "login" });
+    },
   },
   created() {
     this.getTasks();
     this.getProjects();
+    this.carregaLoggedser();
   },
   computed: {
     inputSearch() {

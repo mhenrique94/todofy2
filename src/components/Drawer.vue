@@ -39,7 +39,7 @@ export default {
           icon: "mdi-shape",
           click: "categoryShow",
         },
-        { title: "Usuários", icon: "mdi-account", click: "userShow" },
+        { title: "Usuários", icon: "mdi-account", click: "" },
       ],
       selectedItem: 0,
     };

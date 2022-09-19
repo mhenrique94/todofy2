@@ -28,15 +28,23 @@
     "title": "Pagar Volei",
     "project": "Contas",
     "status": "pending",
-    "date": "2022-09-15T17:06:26.748Z",
-    "userId": 1
+    "date": "2022-09-15",
+    "userId": 2
   },
   {
     "id": 5,
     "title": "Voltar estudar Django",
     "project": "Estudos",
     "status": "pending",
-    "date": "2022-09-15T17:06:26.748Z",
-    "userId": 2
+    "date": "2022-09-15",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "title": "Estudar Django",
+    "project": "Estudos",
+    "status": "done",
+    "date": null,
+    "userId": 1
   }
 ]

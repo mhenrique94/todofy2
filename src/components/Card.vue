@@ -4,9 +4,8 @@
     <v-card-title>{{ tarefa.title }}</v-card-title>
     <v-card-text class="cardText">
       <v-row>Categoria: {{ tarefa.project }}</v-row>
-      <v-row>Vence em {{ tarefa.date }}</v-row>
-      <v-row>Criado por {{ tarefa.userId }}</v-row>
-      <v-row>Status: {{ tarefa.status ? "Concluida" : "Em andamento" }}</v-row>
+      <v-row>Vence em {{ tarefa.date ? tarefa.date : "Indefinida" }}</v-row>
+      <v-row>Status: {{ tarefa.status }}</v-row>
     </v-card-text>
     <v-card-actions>
       <v-btn color="pink lighten-2" text @click="$emit('edita-task', tarefa)">

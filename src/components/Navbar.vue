@@ -6,7 +6,10 @@
       >
     </router-link>
     <v-spacer></v-spacer>
-    <h4 class="white--text font-weight-light">Sua to-do list em vuetify</h4>
+    <h4 class="white--text font-weight-light">
+      <span class="font-weight-bold">{{ loggedUsername }}</span
+      >, sua to-do list em vuetify
+    </h4>
     <v-spacer></v-spacer>
     <ul class="navList">
       <li><router-link to="/" class="white--text">Início</router-link></li>
@@ -23,7 +26,7 @@
 <script>
 export default {
   name: "Navbar",
-  props: ["loggedUser"],
+  props: ["loggedUser", "loggedUsername"],
 };
 </script>
 

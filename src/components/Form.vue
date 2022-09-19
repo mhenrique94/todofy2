@@ -15,8 +15,8 @@
         </v-row>
         <v-row class="centerLine">
           <v-select
-            v-model="myTask.category"
-            :items="categories"
+            v-model="myTask.project"
+            :items="projects"
             :rules="nameRules"
             label="Categoria"
             required
@@ -39,7 +39,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="myTask.dueTo"
+                v-model="myTask.date"
                 :rules="[(v) => !!v || 'Item is required']"
                 label="Selecione a data de expiração da tarefa"
                 prepend-icon="mdi-calendar"
@@ -49,24 +49,17 @@
               ></v-text-field>
             </template>
             <v-date-picker
-              v-model="myTask.dueTo"
+              v-model="myTask.date"
               @input="menu2 = false"
             ></v-date-picker>
           </v-menu>
         </v-row>
         <v-row>
-          <v-text-field
-            v-model="myTask.user"
-            :counter="16"
-            label="Autor"
-            :rules="nameRules"
-            required
-          ></v-text-field>
-          <v-checkbox
-            v-model="myTask.isConclude"
-            label="Tarefa concluída"
-            type="checkbox"
-          ></v-checkbox>
+          <v-select
+            v-model="myTask.status"
+            :items="statuses"
+            label="Status"
+          ></v-select>
         </v-row>
         <v-row>
           <v-btn class="mr-4" @click="reset"> Limpar Form </v-btn>
@@ -107,10 +100,11 @@ export default {
       type: Object,
       required: true,
     },
-    categories: [],
+    projects: Array,
     editingTask: {
       type: Boolean,
     },
+    statuses: Array,
   },
   data() {
     return {

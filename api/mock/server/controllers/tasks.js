@@ -1,7 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 const data = require("../data");
 const auth = require("./auth");
-
 function getMaxId(items) {
   return Math.max(...items.map((item) => item.id));
 }
@@ -29,12 +28,13 @@ module.exports = {
     if (!loggedUser) {
       return;
     }
-    const { title, project, status } = req.body;
+    const { title, project, status, date } = req.body;
     const id = getMaxId(data.tasks) + 1;
     const newTask = {
       id,
       title,
       project,
+      date,
       status,
       userId: loggedUser.id,
     };
@@ -52,10 +52,11 @@ module.exports = {
       res.status(404).end();
       return;
     }
-    const { title, project, status } = req.body;
+    const { title, project, status, date } = req.body;
     task.title = title;
     task.project = project;
     task.status = status;
+    task.date = date;
     res.send(task);
   },
   remove: (req, res) => {
@@ -64,7 +65,7 @@ module.exports = {
       return;
     }
     const { id } = req.params;
-    const task = data.tasks.find((t) => t.id === id);
+    const task = data.tasks.find((t) => t.id == id);
     const index = data.tasks.indexOf(task);
     data.tasks.splice(index, 1);
     res.send(task);
