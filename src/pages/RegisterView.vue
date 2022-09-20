@@ -15,7 +15,26 @@
               required
               outlined
               append-icon="fa-user"
-              v-on:keyup.enter="login"
+              v-on:keyup.enter="signup"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="name"
+              label="Nome"
+              required
+              outlined
+              append-icon="fa-user"
+              v-on:keyup.enter="signup"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="email"
+              label="Email"
+              type="email"
+              required
+              outlined
+              append-icon="fa-envelope"
+              v-on:keyup.enter="signup"
             ></v-text-field>
 
             <v-text-field
@@ -25,7 +44,7 @@
               required
               outlined
               append-icon="fa-key"
-              v-on:keyup.enter="login"
+              v-on:keyup.enter="signup"
             ></v-text-field>
 
             <v-btn
@@ -35,15 +54,10 @@
               class="mr-4"
               x-large
               block
-              @click="login"
-              >Continuar <v-icon class="pl-3">fa-arrow-right</v-icon></v-btn
+              @click="signup"
+              >Registrar <v-icon class="pl-3">fa-arrow-right</v-icon></v-btn
             >
           </v-form>
-          <p class="ma-4">
-            <span class="subtitle-1"
-              >Não tenho conta! Fazer <a href="">Cadastro</a></span
-            >
-          </p>
         </v-card>
       </v-col>
     </v-row>
@@ -59,6 +73,8 @@ export default {
       loading: false,
       valid: false,
       username: "",
+      name: "",
+      email: "",
       password: "",
       snackbar: {
         show: false,
@@ -67,26 +83,21 @@ export default {
     };
   },
   methods: {
-    login() {
+    signup() {
       this.loading = true;
-      AuthApi.login(this.username, this.password)
+      AuthApi.signup(this.username, this.name, this.email, this.password)
         .then((user) => {
           console.log("login ok", user);
-          this.saveLoggedUser(user);
-          this.$router.push({ name: "taskSummary" });
+          this.$router.push({ name: "home" });
         })
         .catch((error) => {
-          console.log("login falhou", error);
+          console.log("Deu erro: ", error);
           this.snackbar.message = "Usuario ou senha invalida";
           this.snackbar.show = true;
         })
         .finally(() => {
           this.loading = false;
         });
-    },
-    saveLoggedUser(user) {
-      window.localStorage.setItem("loggedUser", user.id);
-      window.localStorage.setItem("loggedUserToken", user.token);
     },
   },
 };

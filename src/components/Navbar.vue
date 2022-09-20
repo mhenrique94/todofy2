@@ -26,9 +26,7 @@
         ><li v-show="this.$route.path != '/summary'">Sumário</li></router-link
       >
 
-      <router-link to="/"
-        ><li v-if="loggedUser" @click="$emit('logout')">Sair</li></router-link
-      >
+      <a><li v-if="loggedUser" @click="$emit('logout')">Sair</li></a>
     </ul>
   </nav>
 </template>

@@ -18,25 +18,23 @@
     />
     <v-container v-if="show == 'categoryShow'">
       <v-container fluid class="banner">
-        <v-row>
+        <v-row justify="center" align="center">
           <v-text-field
+            class="text-input"
             v-model="category.name"
             label="Digite e clique em + para adicionar uma nova categoria"
           ></v-text-field>
+          <v-btn @click.stop="dialog = true" :color="category.color.hex">
+            cor
+          </v-btn>
 
-          <v-row justify="center">
-            <v-btn @click.stop="dialog = true" :color="category.color.hex">
-              cor
-            </v-btn>
-
-            <v-dialog v-model="dialog" max-width="320">
-              <v-color-picker
-                class="ma-2"
-                hide-inputs
-                v-model="category.color"
-              ></v-color-picker>
-            </v-dialog>
-          </v-row>
+          <v-dialog v-model="dialog" max-width="320">
+            <v-color-picker
+              class="ma-2"
+              hide-inputs
+              v-model="category.color"
+            ></v-color-picker>
+          </v-dialog>
 
           <v-btn
             class="mx-2 float"
@@ -56,7 +54,7 @@
             v-for="(cat, index) in categories"
             :key="index"
           >
-            <v-icon :style="{ color: cat.color.hex }">mdi-circle</v-icon>
+            <i class="gg-zeit gg" :style="{ color: cat.color.hex }"></i>
             <v-list-item-content>
               <v-list-item-title
                 >{{ cat.name
@@ -226,6 +224,9 @@ export default {
 
 .suspendMenu {
   position: relative;
+}
+.text-input {
+  margin-right: 20px;
 }
 @media (max-width: 600px) {
   .wrapperPage,

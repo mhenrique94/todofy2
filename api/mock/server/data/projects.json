@@ -1,22 +1,30 @@
 [
-    {
-      "name": "Financeiro",
-      "color": "#FFC107",
-      "id": 1
+  {
+    "name": "Financeiro",
+    "color": {
+      "hex": "#58c30c"
     },
-    {
-      "name": "Estudos",
-      "color": "#827717",
-      "id": 2
+    "id": 1
+  },
+  {
+    "name": "Estudos",
+    "color": {
+      "hex": "#197DE1"
     },
-    {
-      "name": "Trabalho",
-      "color": "#F44336",
-      "id": 3
+    "id": 2
+  },
+  {
+    "name": "Trabalho",
+    "color": {
+      "hex": "#E90421"
     },
-    {
-      "name": "Pessoal",
-      "color": "#6A1B9A",
-      "id": 6
-    }
-  ]
+    "id": 3
+  },
+  {
+    "name": "Pessoal",
+    "color": {
+      "hex": "#F1CB0D"
+    },
+    "id": 6
+  }
+]

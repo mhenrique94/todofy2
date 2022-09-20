@@ -41,7 +41,8 @@
           </v-form>
           <p class="ma-4">
             <span class="subtitle-1"
-              >Não tenho conta! Fazer <a href="">Cadastro</a></span
+              >Não tenho conta! Fazer
+              <router-link to="/register">Cadastro</router-link></span
             >
           </p>
         </v-card>
