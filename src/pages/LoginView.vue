@@ -94,7 +94,7 @@ export default {
         .then((user) => {
           console.log("login ok", user);
           this.saveLoggedUser(user);
-          this.$router.push({ name: "home" });
+          this.$router.push({ name: "taskSummary" });
         })
         .catch((error) => {
           console.log("login falhou", error);
