@@ -26,9 +26,6 @@
           >
         </v-row>
         <v-row>
-          <v-date></v-date>
-        </v-row>
-        <v-row>
           <v-menu
             v-model="menu2"
             :close-on-content-click="false"
@@ -108,6 +105,7 @@ export default {
   },
   data() {
     return {
+      menu2: false,
       myTask: { ...this.task },
       valid: true,
       nameRules: [

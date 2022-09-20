@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <v-app-bar app color="#fb2784">
       <Navbar
         :loggedUser="loggedUser"
@@ -75,7 +75,7 @@
         />
       </div>
     </div>
-    <Calendar v-show="show" />
+    <Calendar v-show="show" class="calendar" />
   </div>
 </template>
 
@@ -104,18 +104,16 @@ export default {
       editingTask: false,
       tasks: [],
       task: {
-        id: null,
-        title: null,
-        date: null,
-        project: null,
-        status: null,
+        id: "",
+        title: "",
+        date: "",
+        project: "",
+        status: "",
       },
       projects: [],
-      componentKey: {
-        type: Number,
-      },
+      componentKey: null,
       input: "",
-      statuses: ["done", "pending", "in progress"],
+      statuses: ["done", "pending", "working"],
       loggedUser: "",
       loggedUsername: "",
     };
@@ -208,5 +206,14 @@ export default {
   position: fixed;
   left: 2%;
   top: 15%;
+}
+@media (max-width: 600px) {
+  .calendar {
+    display: none;
+  }
+  .wrapperPage,
+  .wrapper {
+    max-width: 100vw;
+  }
 }
 </style>

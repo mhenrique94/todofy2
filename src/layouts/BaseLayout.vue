@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-main class="mx-8 mb-12 adjust-footer">
+    <v-main class="mx-4 mb-12 adjust-footer">
       <router-view />
       <v-btn
         fab

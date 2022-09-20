@@ -12,13 +12,23 @@
     </h4>
     <v-spacer></v-spacer>
     <ul class="navList">
-      <li><router-link to="/" class="white--text">Início</router-link></li>
-      <li>
-        <router-link to="/manage" class="white--text">Gerenciar</router-link>
-      </li>
-      <li v-if="loggedUser" @click="$emit('logout')">
-        <router-link to="/" class="white--text">Sair</router-link>
-      </li>
+      <router-link to="/"
+        ><li v-show="this.$route.name != 'home'" class="link">
+          Início
+        </li></router-link
+      >
+
+      <router-link to="/manage"
+        ><li v-show="this.$route.name != 'manage'">Gerenciar</li></router-link
+      >
+
+      <router-link to="/summary"
+        ><li v-show="this.$route.path != '/summary'">Sumário</li></router-link
+      >
+
+      <router-link to="/"
+        ><li v-if="loggedUser" @click="$emit('logout')">Sair</li></router-link
+      >
     </ul>
   </nav>
 </template>
@@ -40,25 +50,52 @@ export default {
 
 .navList {
   display: flex;
-  gap: 20px;
+  /* gap: 20px; */
   list-style: none;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  line-height: 6vh;
 }
 
 a {
   text-decoration: none;
   cursor: pointer;
+  color: whitesmoke;
+  line-height: 6vh !important;
+  box-sizing: border-box;
+  text-align: center;
 }
-a:hover {
-  border-radius: 10px;
-  padding: auto 18px;
-  font-weight: 700;
+
+li:hover {
+  background-color: black;
+  filter: invert();
+  opacity: 80%;
+  border-radius: 5px;
 }
+.logo:hover {
+  filter: invert();
+  opacity: 80%;
+  border-radius: 5px;
+  line-height: 6vh;
+}
+
 .logo {
   display: flex;
   align-items: center;
   gap: 30px;
 }
+
 li {
   padding: 0 10px;
+  width: 90px;
+  height: 6vh !important;
+  color: white;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  h4 {
+    display: none;
+  }
 }
 </style>

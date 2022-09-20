@@ -1,5 +1,13 @@
 <template>
   <v-main class="overflow-hidden mt-4">
+    <v-app-bar app color="#fb2784">
+      <Navbar
+        :loggedUser="loggedUser"
+        :loggedUsername="loggedUsername"
+        v-show="show"
+        @logout="logout()"
+      />
+    </v-app-bar>
     <v-container>
       <h2>Resumo das tarefas</h2>
       <div v-for="item in data" :key="item.group">
@@ -27,18 +35,22 @@
 
 <script>
 import TasksApi from "@/api/taskApi.js";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
+  components: { Navbar },
   data: () => {
     return {
       summary: {},
       data: [],
+      show: true,
+      loggedUser: "",
+      loggedUsername: "",
     };
   },
   methods: {
     getSummary() {
       TasksApi.summary().then((data) => {
-        console.log("carregando 2", data);
         this.summary = data;
         for (const [key, value] of Object.entries(data)) {
           const totalTasks = value.pending + value.working + value.done;
@@ -51,10 +63,24 @@ export default {
         }
       });
     },
+    carregaLoggedser() {
+      let usertInfo = JSON.parse(
+        window.localStorage.getItem("loggedUserInfos")
+      );
+      this.loggedUser = window.localStorage.getItem("loggedUser");
+      this.loggedUsername =
+        usertInfo.username.charAt(0).toUpperCase() +
+        usertInfo.username.slice(1);
+    },
+    logout() {
+      window.localStorage.clear;
+      this.$router.push({ name: "login" });
+    },
   },
   created() {
     console.log("carregando 1");
     this.getSummary();
+    this.carregaLoggedser();
   },
 };
 </script>
