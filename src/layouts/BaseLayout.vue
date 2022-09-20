@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-main class="mx-4 mb-12 adjust-footer">
+    <v-main class="adjust-footer">
       <router-view />
       <v-btn
         fab
@@ -21,20 +21,34 @@
 <script>
 export default {
   name: "BaseLayout",
-  props: ["loggedUser", "loggedUsername"],
 
-  computed: {
-    show() {
-      if (this.loggedUser) {
-        return true;
-      }
-      return false;
-    },
+  data() {
+    return {
+      loggedUsername: "",
+      loggedUser: "",
+    };
   },
+
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
+    carregaLoggedser() {
+      try {
+        let usertInfo = JSON.parse(
+          window.localStorage.getItem("loggedUserInfos")
+        );
+        this.loggedUser = window.localStorage.getItem("loggedUser");
+        this.loggedUsername =
+          usertInfo.username.charAt(0).toUpperCase() +
+          usertInfo.username.slice(1);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  created() {
+    this.carregaLoggedser();
   },
 };
 </script>

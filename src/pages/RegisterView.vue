@@ -7,7 +7,7 @@
     <v-row class="text-center">
       <v-col md="6" offset-md="3">
         <v-card class="pa-4 rounded mt-6" outlined tile>
-          <h2>Login</h2>
+          <h2>Cadastre-se</h2>
           <v-form v-model="valid">
             <v-text-field
               v-model="username"
@@ -39,7 +39,18 @@
 
             <v-text-field
               v-model="password"
+              :rules="[required, min6]"
               label="Senha"
+              type="password"
+              required
+              outlined
+              append-icon="fa-key"
+              v-on:keyup.enter="signup"
+            ></v-text-field>
+            <v-text-field
+              v-model="validPassword"
+              :rules="[required, min6, matchingPasswords]"
+              label="Repita a senha"
               type="password"
               required
               outlined
@@ -76,6 +87,7 @@ export default {
       name: "",
       email: "",
       password: "",
+      validPassword: "",
       snackbar: {
         show: false,
         message: "",
@@ -98,6 +110,27 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    matchingPasswords() {
+      if (this.password === this.validPassword) {
+        return true;
+      } else {
+        return "Senhas não coincidem";
+      }
+    },
+    required(value) {
+      if (value) {
+        return true;
+      } else {
+        return "Campo obrigatório";
+      }
+    },
+    min6(value) {
+      if (value.length >= 6) {
+        return true;
+      } else {
+        return "A senha deve conter mais que 6 caracteres";
+      }
     },
   },
 };

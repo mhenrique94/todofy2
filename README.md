@@ -13,11 +13,11 @@ Essa aplicação está sendo criada com base no desafio proposto em sala do prog
 - Adição de tarefas na mesma página;
 - Barra de busca pelo título;
 - Calendário flutuante;
+- Página de sumário
 
 **Funcionalidades pendentes:**
 
 - Landing page;
-- Página de sumário
 - Me diga
 
 **Tecnologias utilizadas:**
