@@ -177,7 +177,7 @@ export default {
       }
     },
     logout() {
-      localStorage.clear;
+      localStorage.clear();
       this.$router.push({ name: "login" });
     },
   },
