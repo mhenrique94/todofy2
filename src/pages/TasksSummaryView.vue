@@ -8,22 +8,30 @@
         @logout="logout()"
       />
     </v-app-bar>
-    <v-container>
+    <v-container margin="auto">
       <h2>Resumo das tarefas</h2>
-      <div v-for="item in data" :key="item.group">
-        <h3>
-          {{ item.group }} <v-chip class="ma-2"> {{ item.tasks }} </v-chip>
-        </h3>
-        <v-progress-circular
-          :rotate="360"
-          :size="100"
-          :width="15"
-          :value="item.percent"
-          color="pink"
-        >
-          {{ value }}
-        </v-progress-circular>
-      </div>
+      <v-container class="taskContainer">
+        <div v-for="item in data" :key="item.group">
+          <h3>
+            {{ item.group }} <v-chip class="ma-2"> {{ item.tasks }} </v-chip>
+          </h3>
+          <v-card class="summaryCard" elevation="0">
+            <v-progress-circular
+              :rotate="360"
+              :size="100"
+              :width="15"
+              :value="item.percent"
+              color="pink"
+            >
+            </v-progress-circular>
+            <p>
+              Done:{{ summary[item.group].done }} <br />
+              Working:{{ summary[item.group].working }}<br />
+              Pending:{{ summary[item.group].pending }}
+            </p>
+          </v-card>
+        </div>
+      </v-container>
       <div class="my-4">
         <v-btn rounded color="primary" dark :to="{ name: 'home' }">
           Ver todas tarefas
@@ -84,3 +92,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.summaryCard {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.taskContainer {
+  display: flex;
+  gap: 100px;
+  max-width: 100%;
+}
+</style>

@@ -9,6 +9,7 @@
         fixed
         bottom
         right
+        v-show="loggedUser"
         @click="scrollToTop"
       >
         <v-icon>mdi-arrow-up</v-icon>
@@ -21,12 +22,7 @@
 export default {
   name: "BaseLayout",
   props: ["loggedUser", "loggedUsername"],
-  // data() {
-  //   return {
-  //     //loggedUsername: this.getUserInfo(),
-  //     show: false,
-  //   };
-  // },
+
   computed: {
     show() {
       if (this.loggedUser) {
@@ -39,21 +35,7 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    // getUserInfo() {
-    //   let usertInfo = JSON.parse(
-    //     window.localStorage.getItem("loggedUserInfos")
-    //   );
-    //   console.log("base=== get user foi chamado", usertInfo);
-    //   return (
-    //     usertInfo.username.charAt(0).toUpperCase() + usertInfo.username.slice(1)
-    //   );
-    // },
   },
-  // created() {
-  //   console.log("base=== created");
-  //   this.getUser();
-  //   this.exhibs();
-  // },
 };
 </script>
 
