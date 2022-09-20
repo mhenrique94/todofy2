@@ -10,8 +10,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: ListView,
+    name: "taskSummary",
+    component: TasksSummaryView,
   },
   {
     path: "/manage",
@@ -29,9 +29,9 @@ const routes = [
     component: RegisterView,
   },
   {
-    path: "/summary",
-    name: "taskSummary",
-    component: TasksSummaryView,
+    path: "/tasks",
+    name: "tasks",
+    component: ListView,
   },
 ];
 

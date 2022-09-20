@@ -37,7 +37,11 @@
         :projects="projects"
         :statuses="statuses"
         :editingTask="editingTask"
-        @to-index="reload()"
+        @to-index="
+          editIsEnabled = false;
+          editingTask = false;
+          listIsEnabled = true;
+        "
         @salva-task="
           (task) => {
             postTasks(task);
@@ -150,7 +154,7 @@ export default {
     },
     updateTasks(mytask) {
       TaskApi.updateTasks(mytask);
-      this.reload();
+      this.$router.push({ name: "tasks" });
     },
     editTasks() {
       TaskApi.editTasks((respostaApi) => {

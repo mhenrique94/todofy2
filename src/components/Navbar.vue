@@ -13,17 +13,16 @@
     <v-spacer></v-spacer>
     <ul class="navList">
       <router-link to="/"
-        ><li v-show="this.$route.name != 'home'" class="link">
+        ><li v-show="this.$route.name != 'taskSummary'" class="link">
           Início
         </li></router-link
+      >
+      <router-link to="/tasks"
+        ><li v-show="this.$route.path != '/tasks'">Tarefas</li></router-link
       >
 
       <router-link to="/manage"
         ><li v-show="this.$route.name != 'manage'">Gerenciar</li></router-link
-      >
-
-      <router-link to="/summary"
-        ><li v-show="this.$route.path != '/summary'">Sumário</li></router-link
       >
 
       <a><li v-if="loggedUser" @click="$emit('logout')">Sair</li></a>

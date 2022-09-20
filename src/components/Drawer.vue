@@ -14,6 +14,7 @@
             v-for="item in items"
             :key="item.title"
             link
+            class="itemTitle"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -39,7 +40,7 @@ export default {
           icon: "mdi-shape",
           click: "categoryShow",
         },
-        { title: "Usuários", icon: "mdi-account", click: "" },
+        // { title: "Usuários", icon: "mdi-account", click: "" },
       ],
       selectedItem: 0,
     };
@@ -55,5 +56,8 @@ export default {
 .listItemGroup {
   display: flex;
   gap: 20px;
+}
+.itemTitle {
+  text-align: center;
 }
 </style>

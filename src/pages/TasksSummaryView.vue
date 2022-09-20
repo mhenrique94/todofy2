@@ -33,7 +33,7 @@
         </div>
       </v-container>
       <div class="my-4">
-        <v-btn rounded color="primary" dark :to="{ name: 'home' }">
+        <v-btn rounded color="primary" dark :to="{ name: 'tasks' }">
           Ver todas tarefas
         </v-btn>
       </div>
