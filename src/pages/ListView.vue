@@ -154,7 +154,7 @@ export default {
     },
     updateTasks(mytask) {
       TaskApi.updateTasks(mytask);
-      this.$router.push({ name: "tasks" });
+      this.reload();
     },
     editTasks() {
       TaskApi.editTasks((respostaApi) => {
